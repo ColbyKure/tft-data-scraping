@@ -6,7 +6,11 @@ from typing import List, Dict, Any, Optional
 
 from constants import *
 
-
+# =====================================================================================
+# =====================================================================================
+# DO NOT USE THIS FILE. USE TEMP_CODE OR OTHER FILE TO TEST/DEV
+# =====================================================================================
+# =====================================================================================
 
 SUMMONER_URL = f"https://{REGIONAL_ROUTE}.api.riotgames.com/tft/summoner/v1/summoners/by-riot-id/{{summonerName}}/NA1"
 MATCH_IDS_URL = f"https://{REGIONAL_ROUTE}.api.riotgames.com/tft/match/v1/matches/by-puuid/{{puuid}}/ids"
@@ -30,6 +34,7 @@ def get_api_data(url: str, params: Dict[str, Any] = None) -> Optional[Any]:
 def calculate_lp_changes(summoner_name, count = 10):
     print(f"Getting Summoner ID and PUUID for '{summoner_name}'...")
     summoner_data = get_api_data(SUMMONER_URL.format(summonerName=summoner_name))
+    pdb.set_trace()
     if not summoner_data: 
         print(f"*o* Summoner not Found Error!!")
         return []

@@ -7,7 +7,7 @@ import pdb
 # Getting summoner name
 GAME_NAME = "kureboy001"
 TAGLINE = 'NA1'
-API_KEY = 'RGAPI-68a707de-5949-4831-91fa-b61ed0208d80'
+API_KEY = 'RGAPI-d508a221-16d8-4efb-b99f-83f0bcbf383e'
 REGIONAL_ROUTE = 'americas'
 GET_BASE_URL = f'https://{REGIONAL_ROUTE}.api.riotgames.com'
 GET_ACCOUNT_BY_RIOT_ID = f'{GET_BASE_URL}/riot/account/v1/accounts/by-riot-id/{GAME_NAME}/{TAGLINE}'
@@ -23,14 +23,16 @@ def get_api_data(url):
         response.raise_for_status()
         return response.json()
     except requests.exceptions.HTTPError as e:
-        print(f"*o* HTTP Error {e.response.status_code} on URL: {url} | Message: {e}")
-        return None
+        print(f"HTTP Error {e.response.status_code} on URL: {url} | Message: {e}")
+        print("Try to refresh dev key: https://developer.riotgames.com/")
+        return
     except requests.exceptions.RequestException as e:
         print(f"*o* Request Error: {e}")
-        return None
+        return
 
 
 acc = get_api_data(GET_ACCOUNT_BY_RIOT_ID)
+
 print(f"Recieved ({acc['gameName']}#{acc['tagLine']}) data with puuid ({acc['puuid']})")
 puuid = acc['puuid']
 league = get_api_data(GET_LEAGUE_BY_PUUID.format(puuid=puuid))
